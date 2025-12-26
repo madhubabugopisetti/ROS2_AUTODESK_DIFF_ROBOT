@@ -228,3 +228,7 @@ gazebo = IncludeLaunchDescription(
 - [BUILD](#build) <br/>
 - Terminal 1: ros2 launc robot_description sim_rviz.launch.py<br />
 - Terminal 2: ros2 run teleop_twist_keyboard teleop_twist_keyboard<br />
+
+**Clean Structure before going to SLAMTOOLBOX**
+- Slam Requires -> Odom -> base_link
+- so remove base_footprint dependency from project

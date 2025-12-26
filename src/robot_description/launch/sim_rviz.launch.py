@@ -52,28 +52,6 @@ def generate_launch_description():
             )
         ]
     )
-    controller_manager = Node(
-        package="controller_manager",
-        executable="ros2_control_node",
-        parameters=[
-            robot_description,
-            os.path.join(pkg_robot, "config", "ros2_controllers.yaml"),
-            {"use_sim_time": True}
-        ],
-        output="screen"
-    )
-
-    joint_state_spawner = Node(
-        package="controller_manager",
-        executable="spawner",
-        arguments=["joint_state_broadcaster"],
-    )
-
-    diff_drive_spawner = Node(
-        package="controller_manager",
-        executable="spawner",
-        arguments=["diff_drive_controller"],
-    )
 
     lidar_bridge = Node(
         package='ros_gz_bridge',

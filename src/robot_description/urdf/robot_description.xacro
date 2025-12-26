@@ -2,16 +2,7 @@
 <robot name="robot_description" xmlns:xacro="http://www.ros.org/wiki/xacro">
 
 	<xacro:include filename="$(find robot_description)/urdf/materials.xacro" />
-	<xacro:include filename="$(find robot_description)/urdf/robot_description.ros2control" />
 	<xacro:include filename="$(find robot_description)/urdf/robot_description.gazebo" />
-	<!-- Base footprint (planar frame) -->
-	<link name="base_footprint" />
-
-	<joint name="base_footprint_joint" type="fixed">
-		<origin xyz="0 0 -0.05" rpy="0 0 0" />
-		<parent link="base_link" />
-		<child link="base_footprint" />
-	</joint>
 
 	<link name="base_link">
 		<inertial>
@@ -176,17 +167,17 @@
 		</plugin>
 	</gazebo>
 	<gazebo reference="lidar_1">
-		<sensor name="gpu_lidar" type="gpu_lidar">
+		<sensor name="laser" type="gpu_lidar">
 			<pose>0 0 0 0 0 0</pose>
 			<topic>lidar</topic>
-			<update_rate>30</update_rate>
+			<update_rate>20</update_rate>
 			<frame_id>lidar_1</frame_id>
 			<always_on>true</always_on>
 			<visualize>true</visualize>
 			<ray>
 				<scan>
 					<horizontal>
-						<samples>360</samples>
+						<samples>180</samples>
 						<min_angle>-3.14159</min_angle>
 						<max_angle>3.14159</max_angle>
 					</horizontal>
