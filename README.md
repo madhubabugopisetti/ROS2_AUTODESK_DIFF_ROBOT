@@ -61,7 +61,7 @@ ros2 pkg create robot_description --build-type ament_cmake
 - ros2 launch robot_description gazebo.launch.py<br />
 - ros2 launch robot_description rviz.launch.py<br />
 
-# GOAL 2: Move model in Gazebo and rviz
+# GOAL 2: Move model in Gazebo and rviz with ROS
 **Major Changes are in this Goal**
 
 ## STEP 1: 
