@@ -169,3 +169,62 @@ gazebo = IncludeLaunchDescription(
 ```
 - [BUILD](#build)
 - Run all launch files(ros2 launch robot_description .launch.py)
+
+
+# GOAL 3: Add LiDAR Sensor to model
+- Add this to xacro file
+```
+<gazebo reference="lidar_1">
+	<sensor name="gpu_lidar" type="gpu_lidar">
+		<pose>0 0 0 0 0 0</pose>
+		<topic>lidar</topic>
+		<update_rate>30</update_rate>
+		<frame_id>lidar_1</frame_id>
+		<always_on>true</always_on>
+		<visualize>true</visualize>
+		<ray>
+			<scan>
+				<horizontal>
+					<samples>720</samples>
+					<min_angle>-3.14159</min_angle>
+					<max_angle>3.14159</max_angle>
+				</horizontal>
+			</scan>
+			<range>
+				<min>0.08</min>
+				<max>10.0</max>
+			</range>
+		</ray>
+	</sensor>
+</gazebo>
+<gazebo>
+	<plugin
+		filename="gz-sim-sensors-system"
+		name="gz::sim::systems::Sensors">
+		<render_engine>ogre2</render_engine>
+	</plugin>
+</gazebo>
+```
+- Add this in ros_gz_bridge.yaml
+```
+	ros_topic_name: "/lidar"
+  	gz_topic_name: "/lidar"
+  	ros_type_name: "sensor_msgs/msg/LaserScan"
+  	gz_type_name: "gz.msgs.LaserScan"
+  	direction: GZ_TO_ROS
+```
+- Add this in sim_rviz.launch.py
+```
+    lidar_bridge = Node(
+        package='ros_gz_bridge',
+        executable='parameter_bridge',
+        arguments=[
+            '/lidar@sensor_msgs/msg/LaserScan@gz.msgs.LaserScan'
+        ],
+        output='screen'
+    )
+```
+
+- [BUILD](#build) <br/>
+- Terminal 1: ros2 launc robot_description sim_rviz.launch.py<br />
+- Terminal 2: ros2 run teleop_twist_keyboard teleop_twist_keyboard<br />

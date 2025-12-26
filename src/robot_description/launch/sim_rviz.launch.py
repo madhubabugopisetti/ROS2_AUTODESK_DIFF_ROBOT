@@ -75,6 +75,15 @@ def generate_launch_description():
         arguments=["diff_drive_controller"],
     )
 
+    lidar_bridge = Node(
+        package='ros_gz_bridge',
+        executable='parameter_bridge',
+        arguments=[
+            '/lidar@sensor_msgs/msg/LaserScan@gz.msgs.LaserScan'
+        ],
+        output='screen'
+    )
+
     # --- ROS ↔ Gazebo bridge ---
     ros_gz_bridge = Node(
         package='ros_gz_bridge',
@@ -99,6 +108,7 @@ def generate_launch_description():
         gazebo,
         robot_state_publisher,
         spawn_robot,
+        lidar_bridge,
         ros_gz_bridge,
         rviz
     ])
