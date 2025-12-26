@@ -40,7 +40,7 @@ ros2 pkg create robot_description --build-type ament_cmake
 ## STEP 4: Creating a differential robot in Fusion 360
 - Create a model in fusion 360<br />
 - Add an external plugin ACDC4Robot<br />
-- ** Folder name for Fusion 360 and Package name for workspace should be same (robot_description)**
+- **Folder name for Fusion 360 and Package name for workspace should be same (robot_description)**
 - export the model with ACDC4Robot, it gives (meshes, config, launc, xm, cmakelist)
 
 ## STEP 4: Import Fusion 360 files into workspace
