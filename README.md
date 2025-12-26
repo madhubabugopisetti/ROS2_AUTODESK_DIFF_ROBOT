@@ -3,18 +3,9 @@
 ## Installation
 - ROS2 JAZZY: https://docs.ros.org/en/jazzy/Installation/Ubuntu-Install-Debs.html
 - GAZEBO HARMONIC: https://gazebosim.org/docs/harmonic/install_ubuntu
-- ROS–Gazebo bridge: 
-```
-sudo apt install ros-jazzy-ros-gz-sim ros-jazzy-ros-gz-bridge ros-jazzy-ros-gz 
-```
-- OTHERS: 
-```
-sudo apt install python3-colcon-common-extensions ros-jazzy-joint-state-publisher ros-jazzy-joint-state-publisher-gui
-```
-- CHECKING:
-```
-sudo apt install liburdfdom-tools
-```
+- ROS–Gazebo bridge: ``` sudo apt install ros-jazzy-ros-gz-sim ros-jazzy-ros-gz-bridge ros-jazzy-ros-gz ```
+- OTHERS: ``` sudo apt install python3-colcon-common-extensions ros-jazzy-joint-state-publisher ros-jazzy-joint-state-publisher-gui ```
+- CHECKING: ``` sudo apt install liburdfdom-tools ```
 
 
 ## BUILD
@@ -57,11 +48,11 @@ ros2 pkg create robot_description --build-type ament_cmake
 - Add urdf config meshes into CMakeLists.txt<br/>
 - Add these in package.xml inside description
 ```
-<depend>xacro</depend>
-<depend>rviz2</depend>
-<depend>robot_state_publisher</depend>
-<depend>joint_state_publisher</depend>
-<depend>joint_state_publisher_gui</depend>
+    <depend>xacro</depend>
+    <depend>rviz2</depend>
+    <depend>robot_state_publisher</depend>
+    <depend>joint_state_publisher</depend>
+    <depend>joint_state_publisher_gui</depend>
 ```
 - [BUILD](#build)<br />
 - ros2 launch robot_description world.launch.py<br />
