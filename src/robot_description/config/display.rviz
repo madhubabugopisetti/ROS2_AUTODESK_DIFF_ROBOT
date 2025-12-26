@@ -141,19 +141,20 @@ Visualization Manager:
       Show Axes: true
       Show Names: false
       Tree:
-        base_link:
-          back_motor_right_2:
-            back_wheel_right_2:
-              {}
-          back_wheel_left_2:
-            back_motor_left_2:
-              {}
-          front_motor_left_2:
-            front_wheel_left_2:
-              {}
-          front_motor_right_2:
-            front_wheel_right_2:
-              {}
+        odom:
+          base_link:
+            back_motor_right_2:
+              back_wheel_right_2:
+                {}
+            back_wheel_left_2:
+              back_motor_left_2:
+                {}
+            front_motor_left_2:
+              front_wheel_left_2:
+                {}
+            front_motor_right_2:
+              front_wheel_right_2:
+                {}
       Update Interval: 0
       Value: true
     - Alpha: 1
@@ -167,26 +168,26 @@ Visualization Manager:
       Class: rviz_default_plugins/LaserScan
       Color: 255; 255; 255
       Color Transformer: Intensity
-      Decay Time: 0.1
+      Decay Time: 0
       Enabled: true
       Invert Rainbow: false
       Max Color: 255; 255; 255
       Max Intensity: 0
       Min Color: 0; 0; 0
       Min Intensity: 0
-      Name: LiDAR
+      Name: LaserScan
       Position Transformer: XYZ
       Selectable: true
       Size (Pixels): 2
-      Size (m): 0.05
-      Style: LINES
+      Size (m): 0.019999999552965164
+      Style: Flat Squares
       Topic:
         Depth: 50
         Durability Policy: Volatile
         Filter size: 10
         History Policy: Keep Last
         Reliability Policy: Reliable
-        Value: /lidar
+        Value: /scan
       Use Fixed Frame: true
       Use rainbow: true
       Value: true

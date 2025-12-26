@@ -167,26 +167,34 @@
 		</plugin>
 	</gazebo>
 	<gazebo reference="lidar_1">
-		<sensor name="laser" type="gpu_lidar">
-			<pose>0 0 0 0 0 0</pose>
-			<topic>lidar</topic>
-			<update_rate>20</update_rate>
+		<sensor name="gpu_lidar" type="gpu_lidar">
+			<update_rate>10</update_rate>
+			<topic>scan</topic>
+			<gz_frame_id>lidar_1</gz_frame_id>
 			<frame_id>lidar_1</frame_id>
-			<always_on>true</always_on>
-			<visualize>true</visualize>
-			<ray>
+			<lidar>
 				<scan>
 					<horizontal>
 						<samples>180</samples>
-						<min_angle>-3.14159</min_angle>
-						<max_angle>3.14159</max_angle>
+						<resolution>1</resolution>
+						<min_angle>-3.14156</min_angle>
+						<max_angle>3.14156</max_angle>
 					</horizontal>
 				</scan>
 				<range>
-					<min>0.08</min>
+					<min>0.05</min>
 					<max>10.0</max>
+					<resolution>0.01</resolution>
 				</range>
-			</ray>
+				<noise>
+					<type>gaussian</type>
+					<mean>0.0</mean>
+					<stddev>0.01</stddev>
+				</noise>
+				<frame_id>scan_link</frame_id>
+			</lidar>
+			<always_on>1</always_on>
+			<visualize>true</visualize>
 		</sensor>
 	</gazebo>
 	<gazebo>

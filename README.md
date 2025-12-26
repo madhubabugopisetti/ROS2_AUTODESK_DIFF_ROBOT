@@ -232,3 +232,4 @@ gazebo = IncludeLaunchDescription(
 **Clean Structure before going to SLAMTOOLBOX**
 - Slam Requires -> Odom -> base_link
 - so remove base_footprint dependency from project
+- replace /ladar with /scan
