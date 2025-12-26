@@ -171,7 +171,7 @@ gazebo = IncludeLaunchDescription(
 - Run all launch files(ros2 launch robot_description .launch.py)
 
 
-# GOAL 3: Add LiDAR Sensor to model
+# GOAL 4: Add LiDAR Sensor to model
 - Add this to xacro file
 ```
 <gazebo reference="lidar_1">
