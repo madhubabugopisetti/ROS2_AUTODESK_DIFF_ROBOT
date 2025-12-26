@@ -128,3 +128,44 @@ ros2 pkg create robot_description --build-type ament_cmake
 - Terminal 1: ros2 launc robot_description sim_rviz.launch.py<br />
 - Terminal 2: ros2 run teleop_twist_keyboard teleop_twist_keyboard<br />
 - You should be able to type commands and model will be moving
+
+# GOAL 3: Create world in Gazebo
+- Open world.sdf and add this model
+```
+<model name="wall_test">
+    <static>true</static>
+    <pose>0 5 0.75 0 0 0</pose>
+    <link name="link">
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>10 0.2 1.5</size>
+            </box>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>10 0.2 1.5</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0 0 1 1</ambient>
+            <diffuse>0 0 1 1</diffuse>
+          </material>
+        </visual>
+    </link>
+</model>
+```
+- Add these lines in all launch files
+```
+world_file = os.path.join(pkg_ros_gz_rbot, 'worlds', 'world.sdf')
+gazebo = IncludeLaunchDescription(
+    PythonLaunchDescriptionSource(join(pkg_ros_gz_sim, "launch", "gz_sim.launch.py")),
+    launch_arguments={
+        "gz_args": f"-r -v 4 {world_file}"
+    }.items()
+)
+```
+- [BUILD](#build)
+- Run all launch files(ros2 launch robot_description .launch.py)

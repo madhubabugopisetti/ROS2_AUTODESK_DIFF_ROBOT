@@ -13,6 +13,7 @@ def generate_launch_description():
 
     pkg_robot = get_package_share_directory('robot_description')
     pkg_gz = get_package_share_directory('ros_gz_sim')
+    world_file = os.path.join(pkg_robot, 'worlds', 'world.sdf')
 
     # --- Robot description ---
     xacro_file = os.path.join(pkg_robot, 'urdf', 'robot_description.xacro')
@@ -29,11 +30,9 @@ def generate_launch_description():
 
     # --- Gazebo ---
     gazebo = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource(
-            join(pkg_gz, 'launch', 'gz_sim.launch.py')
-        ),
+        PythonLaunchDescriptionSource(join(pkg_gz, "launch", "gz_sim.launch.py")),
         launch_arguments={
-            'gz_args': '-r -v 4 empty.sdf'
+            "gz_args": f"-r -v 4 {world_file}"
         }.items()
     )
 

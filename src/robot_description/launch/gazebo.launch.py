@@ -18,8 +18,8 @@ def generate_launch_description():
     
     robot_description_config = xacro.process_file(robot_description_file)
     robot_description = {'robot_description': robot_description_config.toxml()}
+    world_file = os.path.join(pkg_ros_gz_rbot, 'worlds', 'world.sdf')
 
-   
     robot_state_publisher = Node(
         package='robot_state_publisher',
         executable='robot_state_publisher',
@@ -28,10 +28,11 @@ def generate_launch_description():
         parameters=[robot_description],
     )
 
-   
     gazebo = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(join(pkg_ros_gz_sim, "launch", "gz_sim.launch.py")),
-        launch_arguments={"gz_args": "-r -v 4 empty.sdf"}.items()
+        launch_arguments={
+            "gz_args": f"-r -v 4 {world_file}"
+        }.items()
     )
 
     spawn_robot = TimerAction(
@@ -45,7 +46,7 @@ def generate_launch_description():
                 "-allow_renaming", "false",  # prevents "_1" duplicate
                 "-x", "0.0",
                 "-y", "0.0",
-                "-z", "0.32",
+                "-z", "0.4",
                 "-Y", "0.0"
             ],
             output='screen'
@@ -61,7 +62,7 @@ def generate_launch_description():
 
     return LaunchDescription([
         gazebo,
+        robot_state_publisher,
         spawn_robot,
         ros_gz_bridge,
-        robot_state_publisher,
     ])
