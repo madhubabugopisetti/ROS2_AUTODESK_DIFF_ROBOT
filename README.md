@@ -3,9 +3,9 @@
 ## Installation
 - ROS2 JAZZY: https://docs.ros.org/en/jazzy/Installation/Ubuntu-Install-Debs.html
 - GAZEBO HARMONIC: https://gazebosim.org/docs/harmonic/install_ubuntu
-- ROS–Gazebo bridge: sudo apt install ros-jazzy-ros-gz-sim ros-jazzy-ros-gz-bridge ros-jazzy-ros-gz
-- OTHERS: sudo apt install python3-colcon-common-extensions ros-jazzy-joint-state-publisher ros-jazzy-joint-state-publisher-gui
-- CHECKING: sudo apt install liburdfdom-tools
+- ROS–Gazebo bridge: ``` sudo apt install ros-jazzy-ros-gz-sim ros-jazzy-ros-gz-bridge ros-jazzy-ros-gz ```
+- OTHERS: ``` sudo apt install python3-colcon-common-extensions ros-jazzy-joint-state-publisher ros-jazzy-joint-state-publisher-gui ```
+- CHECKING: ``` sudo apt install liburdfdom-tools ```
 
 
 ## BUILD
