@@ -47,13 +47,13 @@ ros2 pkg create robot_description --build-type ament_cmake
 - Move config, urdf, meshes, launch folder to robot_description folder<br />
 - Add urdf config meshes into CMakeLists.txt<br/>
 - Add these in package.xml inside description
-    - ```
+```
     <depend>xacro</depend>
     <depend>rviz2</depend>
     <depend>robot_state_publisher</depend>
     <depend>joint_state_publisher</depend>
     <depend>joint_state_publisher_gui</depend>
-    ```
+```
 - [BUILD](#build)<br />
 - ros2 launch robot_description world.launch.py<br />
 - ros2 launch robot_description gazebo.launch.py<br />
