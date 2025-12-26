@@ -11,6 +11,9 @@ install(
   DIRECTORY
     worlds
     launch
+    meshes
+    config
+    urdf
   DESTINATION share/${PROJECT_NAME}
 )
 
