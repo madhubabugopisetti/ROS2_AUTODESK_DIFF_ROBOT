@@ -226,10 +226,47 @@ gazebo = IncludeLaunchDescription(
 ```
 
 - [BUILD](#build) <br/>
-- Terminal 1: ros2 launc robot_description sim_rviz.launch.py<br />
+- Terminal 1: ros2 launch robot_description sim_rviz.launch.py<br />
 - Terminal 2: ros2 run teleop_twist_keyboard teleop_twist_keyboard<br />
 
 **Clean Structure before going to SLAMTOOLBOX**
 - Slam Requires -> Odom -> base_link
 - so remove base_footprint dependency from project
 - replace /ladar with /scan
+- To Check -> ros2 topic list
+```
+/scan
+/odom
+/tf
+/tf_static
+```
+
+
+# GOAL 5: Creating a map with SLAMTOOBOX
+
+## INSTALLATION: ```sudo apt install ros-jazzy-slam-toolbox ros-jazzy-navigation2 ros-jazzy-nav2-bringup```
+
+## STEP 1:
+- Create slam_toolbox.yaml and slam.launch.py (refer code in github)<br />
+- We are going to use our gazebo.launch.py, slam.launch.py for generating map<br />
+- [BUILD](#build)<br />
+- **Order is important**
+	- First Terminal: ros2 launch robot_description gazebo.launch.py<br />
+	- Second Terminal: ros2 launch robot_description slam.launch.py<br />
+	- Third Terminal: ros2 lifecycle nodes<br />
+		- Expected /slam_toolbox<br />
+		- Activate SLAM: ros2 lifecycle set /slam_toolbox configure ros2 lifecycle set /slam_toolbox activate<br />
+		- Run: ros2 topic list | grep map<br />
+		- Expected:  /map /map_metadata<br />
+	- Fourth Terminal: rviz2 -d src/robot_description/config/display.rviz<br />
+	- Fifth Terminal(**Don't run now**): ros2 run teleop_twist_keyboard teleop_twist_keyboard<br />
+	- Sixth Terminal(**Don't run now**): ros2 run nav2_map_server map_saver_cli -f ~/my_map<br />
+- Now RVIZ will be opened, follow below steps
+```
+Change fixed frame to map
+Add map and select topic /map(wait for few secs), light gray color base will appear
+Run Fifth Terminal and move using keyboard
+Map will slowly change from gray to white, Cover whole area
+Save map by running Sixth Terminal
+After saving, close all terminals, in home you should see two files -> my_map.pgm, my_map.yaml
+```
