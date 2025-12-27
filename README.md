@@ -271,14 +271,62 @@ Save map by running Sixth Terminal
 After saving, close all terminals, in home you should see two files -> my_map.pgm, my_map.yaml
 ```
 
-# GOAL 6: LOCALIZATION a map with SLAMTOOBOX
+# GOAL 6: LOCALIZATION a map with SLAMTOOLBOX
+
 - **Installation**: sudo apt install ros-jazzy-nav2-bringup ros-jazzy-nav2-map-server ros-jazzy-nav2-amcl
 - Create two files -> localization.yaml, localization.launch.py
 - [BUILD](#build)<br />
 - **Order is important**
+```
 	- First Terminal: ros2 launch robot_description gazebo.launch.py<br />
 	- Second Terminal: ros2 launch robot_description localization.launch.py<br />
 	- Third Terminal: rviz2 -d src/robot_description/config/display.rviz<br />
 		- Click on 2D Pose Estimate and select the model<br />
-		- Now add **Map**, topic **/map**, Durability Policy **Transient Local** <br />
+		- Now add **Map**, topic **/map**, Durability Policy **Transient Local**
+```
+
+# GOAL 7: AUTONOMOUS NAVIGATION (NAV2)
+
+- **Installation**: sudo apt install ros-jazzy-navigation2 ros-jazzy-nav2-bringup
+- Create localization.rviz to auto launch from localization file
+- Rename localization.yaml to localization_params.yaml and change this name in localization.launch.py
+- Create Two files for navigation -> navigation_params.yaml, navigation.launch.py
+
+**IMPORTANT TO FOLLOW SEQUENCE**
+## STEP 1: 
+```
+pkill -f ros2
+pkill -f gazebo
+pkill -f gz
+pkill -f rviz
+pkill -f nav2
+pkill -f slam_toolbox
+```
+
+## STEP 2:
+- [BUILD](#build)
+- **Terminal 1** : ``` ros2 launch robot_description gazebo.launch.py ```
+- **Terminal 2** : ``` ros2 launch robot_description localization.launch.py ```
+```
+In RVIZ, Click on 2D Pose Estimate and click on model (which will be in white color)
+You should be able to model in material colors
+
+Run this to verify
+ros2 run tf2_tools view_frames = 
+```
+- **Terminal 3** : 
+```
+ros2 launch nav2_bringup navigation_launch.py \
+use_sim_time:=true \
+params_file:=src/robot_description/config/navigation_params.yaml
+```
+- To Verify:
+```
+ros2 lifecycle nodes
+ros2 lifecycle get /controller_server → Active
+ros2 lifecycle get /bt_navigator → Active
+```
+```
+Click on 2D Goal Pose, and click on map
+Model should go to the point
 ```

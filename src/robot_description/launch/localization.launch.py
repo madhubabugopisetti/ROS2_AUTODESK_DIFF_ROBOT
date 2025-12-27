@@ -6,6 +6,7 @@ import os
 def generate_launch_description():
 
     pkg = get_package_share_directory('robot_description')
+    rviz_config_file = os.path.join(pkg, 'config', 'localization.rviz')
 
     amcl = Node(
         package='nav2_amcl',
@@ -13,7 +14,7 @@ def generate_launch_description():
         name='amcl',
         output='screen',
         parameters=[
-            os.path.join(pkg, 'config', 'localization.yaml')
+            os.path.join(pkg, 'config', 'localization_params.yaml')
         ]
     )
 
@@ -26,6 +27,14 @@ def generate_launch_description():
             'yaml_filename': os.path.expanduser('~/my_map2.yaml'),
             'use_sim_time': True
         }]
+    )
+
+    rviz_node = Node(
+        package='rviz2',
+        executable='rviz2',
+        name='rviz2',
+        arguments=['-d', rviz_config_file],
+        output='screen'
     )
 
     lifecycle_manager = Node(
@@ -42,6 +51,7 @@ def generate_launch_description():
 
     return LaunchDescription([
         map_server,
+        rviz_node,
         amcl,
         lifecycle_manager
     ])
