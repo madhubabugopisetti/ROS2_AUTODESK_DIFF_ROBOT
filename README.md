@@ -270,3 +270,15 @@ Map will slowly change from gray to white, Cover whole area
 Save map by running Sixth Terminal
 After saving, close all terminals, in home you should see two files -> my_map.pgm, my_map.yaml
 ```
+
+# GOAL 6: LOCALIZATION a map with SLAMTOOBOX
+- **Installation**: sudo apt install ros-jazzy-nav2-bringup ros-jazzy-nav2-map-server ros-jazzy-nav2-amcl
+- Create two files -> localization.yaml, localization.launch.py
+- [BUILD](#build)<br />
+- **Order is important**
+	- First Terminal: ros2 launch robot_description gazebo.launch.py<br />
+	- Second Terminal: ros2 launch robot_description localization.launch.py<br />
+	- Third Terminal: rviz2 -d src/robot_description/config/display.rviz<br />
+		- Click on 2D Pose Estimate and select the model<br />
+		- Now add **Map**, topic **/map**, Durability Policy **Transient Local** <br />
+```
