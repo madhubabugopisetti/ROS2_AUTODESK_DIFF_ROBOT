@@ -330,3 +330,30 @@ ros2 lifecycle get /bt_navigator → Active
 Click on 2D Goal Pose, and click on map
 Model should go to the point
 ```
+
+# GOAL 8: LIVE SLAM + NAV2 (NO STATIC MAP, NO AMCL)
+- No New files, Just order of calling files is different
+- [BUILD](#build)
+- Terminal 1: ros2 launch robot_description gazebo.launch.py
+- Terminal 2: ros2 launch robot_description slam.launch.py
+- Terminal 3: 
+```
+Activate slamtoobox: ros2 lifecycle set /slam_toolbox configure \ ros2 lifecycle set /slam_toolbox activate
+Check TF tree : ros2 run tf2_tools view_frames
+map
+ └── odom
+      └── base_link
+           └── lidar_1
+```
+- Terminal 4: 
+```
+ros2 launch nav2_bringup navigation_launch.py \
+use_sim_time:=true \
+params_file:=src/robot_description/config/navigation_slam_params.yaml
+```
+- Terminal 5: ```rviz2 -d src/robot_description/config/display.rviz```
+
+Test: Add a box / cylinder / wall in Gazebo in front of the robot
+
+
+**!!!DONE**
